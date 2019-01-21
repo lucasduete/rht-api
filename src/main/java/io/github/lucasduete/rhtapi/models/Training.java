@@ -1,5 +1,7 @@
 package io.github.lucasduete.rhtapi.models;
 
+import io.github.lucasduete.rhtapi.models.interfaces.Indicator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
