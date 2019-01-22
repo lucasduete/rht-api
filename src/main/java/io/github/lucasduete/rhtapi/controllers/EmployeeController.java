@@ -27,6 +27,11 @@ public class EmployeeController {
         else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Occurred error while saving employee");
     }
 
+    @GetMapping
+    public ResponseEntity listEmployee() {
+        return ResponseEntity.ok(this.service.findAll());
+    }
+
     @PostMapping
     public ResponseEntity login(@RequestParam(name = "email", required = true) String email,
                                 @RequestParam(name = "password", required = true) String password) {
