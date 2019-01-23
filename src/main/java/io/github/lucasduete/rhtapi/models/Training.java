@@ -82,6 +82,14 @@ public class Training implements Serializable {
         this.vacancyOffered = vacancyOffered;
     }
 
+    public Integer getVacancyUsed() {
+        return this.employees.size();
+    }
+
+    public Integer getVacancyOpen() {
+        return (this.vacancyOffered - this.getVacancyUsed());
+    }
+
     public Integer getQuantHrsLesson() {
         return quantHrsLesson;
     }
