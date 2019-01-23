@@ -18,6 +18,10 @@ public class Training implements Serializable {
     @Column(length = 100, nullable = false)
     private String name;
 
+    private Integer vacancyOffered;
+
+    private Integer quantHrsLesson;
+
     @Column(nullable = false)
     private LocalDate dataStart;
 
@@ -40,9 +44,12 @@ public class Training implements Serializable {
 
     }
 
-    public Training(String name, LocalDate dataStart, LocalDate dateFinish, List<Employee> employees,
-                    List<Appraiser> appraisers, List<Question> questions, List<Indicator> indicators) {
+    public Training(String name, Integer vacancyOffered, Integer quantHrsLesson, LocalDate dataStart,
+                    LocalDate dateFinish, List<Employee> employees, List<Appraiser> appraisers,
+                    List<Question> questions, List<Indicator> indicators) {
         this.name = name;
+        this.vacancyOffered = vacancyOffered;
+        this.quantHrsLesson = quantHrsLesson;
         this.dataStart = dataStart;
         this.dateFinish = dateFinish;
         this.employees = employees;
@@ -65,6 +72,22 @@ public class Training implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getVacancyOffered() {
+        return vacancyOffered;
+    }
+
+    public void setVacancyOffered(Integer vacancyOffered) {
+        this.vacancyOffered = vacancyOffered;
+    }
+
+    public Integer getQuantHrsLesson() {
+        return quantHrsLesson;
+    }
+
+    public void setQuantHrsLesson(Integer quantHrsLesson) {
+        this.quantHrsLesson = quantHrsLesson;
     }
 
     public LocalDate getDataStart() {
@@ -95,6 +118,10 @@ public class Training implements Serializable {
         return appraisers;
     }
 
+    public void addEmployee(Employee employee) {
+        this.employees.add(employee);
+    }
+
     public void setAppraisers(List<Appraiser> appraisers) {
         this.appraisers = appraisers;
     }
@@ -120,10 +147,12 @@ public class Training implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Training training = (Training) o;
-        return Objects.equals(id, training.id) &&
+        return id.equals(training.id) &&
                 name.equals(training.name) &&
+                Objects.equals(vacancyOffered, training.vacancyOffered) &&
+                Objects.equals(quantHrsLesson, training.quantHrsLesson) &&
                 dataStart.equals(training.dataStart) &&
-                dateFinish.equals(training.dateFinish) &&
+                Objects.equals(dateFinish, training.dateFinish) &&
                 Objects.equals(employees, training.employees) &&
                 Objects.equals(appraisers, training.appraisers) &&
                 Objects.equals(questions, training.questions) &&
@@ -132,7 +161,8 @@ public class Training implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, dataStart, dateFinish, employees, appraisers, questions, indicators);
+        return Objects.hash(id, name, vacancyOffered, quantHrsLesson, dataStart, dateFinish, employees,
+                appraisers, questions, indicators);
     }
 
     @Override
@@ -140,6 +170,8 @@ public class Training implements Serializable {
         return "Training{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", vacancyOffered=" + vacancyOffered +
+                ", quantHrsLesson=" + quantHrsLesson +
                 ", dataStart=" + dataStart +
                 ", dateFinish=" + dateFinish +
                 ", employees=" + employees +
@@ -148,4 +180,5 @@ public class Training implements Serializable {
                 ", indicators=" + indicators +
                 '}';
     }
+
 }
