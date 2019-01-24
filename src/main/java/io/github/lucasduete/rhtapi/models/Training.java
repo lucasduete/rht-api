@@ -20,6 +20,8 @@ public class Training implements Serializable {
 
     private Integer vacancyOffered;
 
+    private Integer quantLesson;
+
     private Integer quantHrsLesson;
 
     @Column(nullable = false)
@@ -44,11 +46,12 @@ public class Training implements Serializable {
 
     }
 
-    public Training(String name, Integer vacancyOffered, Integer quantHrsLesson, LocalDate dataStart,
-                    LocalDate dateFinish, List<Employee> employees, List<Appraiser> appraisers,
+    public Training(String name, Integer vacancyOffered, Integer quantLesson, Integer quantHrsLesson,
+                    LocalDate dataStart, LocalDate dateFinish, List<Employee> employees, List<Appraiser> appraisers,
                     List<Question> questions, List<Indicator> indicators) {
         this.name = name;
         this.vacancyOffered = vacancyOffered;
+        this.quantLesson = quantLesson;
         this.quantHrsLesson = quantHrsLesson;
         this.dataStart = dataStart;
         this.dateFinish = dateFinish;
@@ -88,6 +91,14 @@ public class Training implements Serializable {
 
     public Integer getVacancyOpen() {
         return (this.vacancyOffered - this.getVacancyUsed());
+    }
+
+    public Integer getQuantLesson() {
+        return quantLesson;
+    }
+
+    public void setQuantLesson(Integer quantLesson) {
+        this.quantLesson = quantLesson;
     }
 
     public Integer getQuantHrsLesson() {
@@ -155,11 +166,12 @@ public class Training implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Training training = (Training) o;
-        return id.equals(training.id) &&
-                name.equals(training.name) &&
+        return Objects.equals(id, training.id) &&
+                Objects.equals(name, training.name) &&
                 Objects.equals(vacancyOffered, training.vacancyOffered) &&
+                Objects.equals(quantLesson, training.quantLesson) &&
                 Objects.equals(quantHrsLesson, training.quantHrsLesson) &&
-                dataStart.equals(training.dataStart) &&
+                Objects.equals(dataStart, training.dataStart) &&
                 Objects.equals(dateFinish, training.dateFinish) &&
                 Objects.equals(employees, training.employees) &&
                 Objects.equals(appraisers, training.appraisers) &&
@@ -169,8 +181,7 @@ public class Training implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, vacancyOffered, quantHrsLesson, dataStart, dateFinish, employees,
-                appraisers, questions, indicators);
+        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dataStart, dateFinish, employees, appraisers, questions, indicators);
     }
 
     @Override
@@ -179,6 +190,7 @@ public class Training implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", vacancyOffered=" + vacancyOffered +
+                ", quantLesson=" + quantLesson +
                 ", quantHrsLesson=" + quantHrsLesson +
                 ", dataStart=" + dataStart +
                 ", dateFinish=" + dateFinish +
