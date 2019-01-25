@@ -19,10 +19,11 @@ public class GoalsIndicator implements Indicator {
     @Override
     public Integer calculate() {
 
-        Integer quantHrsLesson = this.training.getQuantHrsLesson();
+        Integer maxHrsLesson = this.training.getQuantHrsLesson();
+        Integer finishedHrsLesson = new Integer(maxHrsLesson);
 
-        for (Absence absence : absences) quantHrsLesson -= (absence.getQuant() * 60);
+        for (Absence absence : absences) finishedHrsLesson -= (absence.getQuant() * 60);
 
-        return quantHrsLesson;
+        return (maxHrsLesson / finishedHrsLesson) * 100;
     }
 }
