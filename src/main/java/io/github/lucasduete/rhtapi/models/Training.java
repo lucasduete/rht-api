@@ -42,13 +42,16 @@ public class Training implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Indicator> indicators;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Rating> ratings;
+
     public Training() {
 
     }
 
     public Training(String name, Integer vacancyOffered, Integer quantLesson, Integer quantHrsLesson,
                     LocalDate dataStart, LocalDate dateFinish, List<Employee> employees, List<Appraiser> appraisers,
-                    List<Question> questions, List<Indicator> indicators) {
+                    List<Question> questions, List<Indicator> indicators, List<Rating> ratings) {
         this.name = name;
         this.vacancyOffered = vacancyOffered;
         this.quantLesson = quantLesson;
@@ -59,6 +62,7 @@ public class Training implements Serializable {
         this.appraisers = appraisers;
         this.questions = questions;
         this.indicators = indicators;
+        this.ratings = ratings;
     }
 
     public Long getId() {
@@ -161,6 +165,14 @@ public class Training implements Serializable {
         this.indicators = indicators;
     }
 
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -176,12 +188,13 @@ public class Training implements Serializable {
                 Objects.equals(employees, training.employees) &&
                 Objects.equals(appraisers, training.appraisers) &&
                 Objects.equals(questions, training.questions) &&
-                Objects.equals(indicators, training.indicators);
+                Objects.equals(indicators, training.indicators) &&
+                Objects.equals(ratings, training.ratings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dataStart, dateFinish, employees, appraisers, questions, indicators);
+        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dataStart, dateFinish, employees, appraisers, questions, indicators, ratings);
     }
 
     @Override
@@ -198,7 +211,7 @@ public class Training implements Serializable {
                 ", appraisers=" + appraisers +
                 ", questions=" + questions +
                 ", indicators=" + indicators +
+                ", ratings=" + ratings +
                 '}';
     }
-
 }
