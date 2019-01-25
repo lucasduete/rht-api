@@ -1,5 +1,6 @@
-package io.github.lucasduete.rhtapi.indicators;
+package io.github.lucasduete.rhtapi.indicators.implementations;
 
+import io.github.lucasduete.rhtapi.indicators.interfaces.Indicator;
 import io.github.lucasduete.rhtapi.models.Training;
 import io.github.lucasduete.rhtapi.services.AbsenceService;
 
