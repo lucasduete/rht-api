@@ -1,7 +1,5 @@
 package io.github.lucasduete.rhtapi.models;
 
-import io.github.lucasduete.rhtapi.models.interfaces.Indicator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -39,9 +37,6 @@ public class Training implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Question> questions;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Indicator> indicators;
-
     @OneToMany(fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
@@ -51,7 +46,7 @@ public class Training implements Serializable {
 
     public Training(String name, Integer vacancyOffered, Integer quantLesson, Integer quantHrsLesson,
                     LocalDate dataStart, LocalDate dateFinish, List<Employee> employees, List<Appraiser> appraisers,
-                    List<Question> questions, List<Indicator> indicators, List<Rating> ratings) {
+                    List<Question> questions, List<Rating> ratings) {
         this.name = name;
         this.vacancyOffered = vacancyOffered;
         this.quantLesson = quantLesson;
@@ -61,7 +56,6 @@ public class Training implements Serializable {
         this.employees = employees;
         this.appraisers = appraisers;
         this.questions = questions;
-        this.indicators = indicators;
         this.ratings = ratings;
     }
 
@@ -157,14 +151,6 @@ public class Training implements Serializable {
         this.questions = questions;
     }
 
-    public List<Indicator> getIndicators() {
-        return indicators;
-    }
-
-    public void setIndicators(List<Indicator> indicators) {
-        this.indicators = indicators;
-    }
-
     public List<Rating> getRatings() {
         return ratings;
     }
@@ -188,13 +174,12 @@ public class Training implements Serializable {
                 Objects.equals(employees, training.employees) &&
                 Objects.equals(appraisers, training.appraisers) &&
                 Objects.equals(questions, training.questions) &&
-                Objects.equals(indicators, training.indicators) &&
                 Objects.equals(ratings, training.ratings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dataStart, dateFinish, employees, appraisers, questions, indicators, ratings);
+        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dataStart, dateFinish, employees, appraisers, questions, ratings);
     }
 
     @Override
@@ -210,8 +195,8 @@ public class Training implements Serializable {
                 ", employees=" + employees +
                 ", appraisers=" + appraisers +
                 ", questions=" + questions +
-                ", indicators=" + indicators +
                 ", ratings=" + ratings +
                 '}';
     }
+
 }

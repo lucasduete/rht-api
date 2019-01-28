@@ -18,19 +18,20 @@ public class Question implements Serializable {
     private String question;
 
     @Enumerated(EnumType.STRING)
-    private Enum<TypeQuestion> typeQuestion;
+    private TypeQuestion typeQuestion;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable
     private List<String> options;
 
     @OneToMany
     private List<Response> responses;
 
     public Question() {
-
+        this.typeQuestion = TypeQuestion.SELECIONADA;
     }
 
-    public Question(String question, Enum<TypeQuestion> typeQuestion, List<String> options, List<Response> responses) {
+    public Question(String question, TypeQuestion typeQuestion, List<String> options, List<Response> responses) {
         this.question = question;
         this.typeQuestion = typeQuestion;
         this.options = options;
@@ -53,11 +54,11 @@ public class Question implements Serializable {
         this.question = question;
     }
 
-    public Enum<TypeQuestion> getTypeQuestion() {
+    public TypeQuestion getTypeQuestion() {
         return typeQuestion;
     }
 
-    public void setTypeQuestion(Enum<TypeQuestion> typeQuestion) {
+    public void setTypeQuestion(TypeQuestion typeQuestion) {
         this.typeQuestion = typeQuestion;
     }
 
