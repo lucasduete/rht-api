@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppraiserRepository extends JpaRepository<Appraiser, String> {
 
-    @Query("SELECT a FROM Appraiser a WHERE a.Email = ?1 and a.Password = ?2")
+    @Query("SELECT a FROM Appraiser a WHERE a.email = ?1 and a.password = ?2")
     Appraiser authenticate(String email, String password);
 }

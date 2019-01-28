@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
-    @Query("SELECT e FROM Employee e WHERE e.Email = ?1 and e.Password = ?2")
+    @Query("SELECT e FROM Employee e WHERE e.email = ?1 and e.password = ?2")
     Employee authenticate(String email, String password);
 }
