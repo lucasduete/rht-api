@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface AbsenceRepository extends JpaRepository<Absence, Long> {
 
-    public List<Absence> findByTraining_Id(Long trainingId);
+    public List<Absence> findByTrainingId(Long trainingId);
 }

@@ -20,7 +20,7 @@ public class AbsenceService {
     }
 
     public List<Absence> listByTraining(Long trainingId) {
-        return this.repository.findByTraining_Id(trainingId);
+        return this.repository.findByTrainingId(trainingId);
     }
 
 }
