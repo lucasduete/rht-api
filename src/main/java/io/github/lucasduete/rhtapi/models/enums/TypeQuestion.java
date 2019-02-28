@@ -1,6 +1,5 @@
 package io.github.lucasduete.rhtapi.models.enums;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
 
 public enum TypeQuestion implements Serializable {
@@ -11,7 +10,7 @@ public enum TypeQuestion implements Serializable {
 
     private String name;
 
-    TypeQuestion(String naome) {
+    TypeQuestion(String name) {
         this.name = name;
     }
 
@@ -25,4 +24,5 @@ public enum TypeQuestion implements Serializable {
                 "name='" + name + '\'' +
                 '}';
     }
+
 }
