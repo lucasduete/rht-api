@@ -1,5 +1,7 @@
 package io.github.lucasduete.rhtapi.models;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Builder
 public class Training implements Serializable {
 
     @Id
@@ -42,21 +45,6 @@ public class Training implements Serializable {
 
     public Training() {
 
-    }
-
-    public Training(String name, Integer vacancyOffered, Integer quantLesson, Integer quantHrsLesson,
-                    LocalDate dataStart, LocalDate dateFinish, List<Employee> employees, List<Appraiser> appraisers,
-                    List<Question> questions, List<Rating> ratings) {
-        this.name = name;
-        this.vacancyOffered = vacancyOffered;
-        this.quantLesson = quantLesson;
-        this.quantHrsLesson = quantHrsLesson;
-        this.dataStart = dataStart;
-        this.dateFinish = dateFinish;
-        this.employees = employees;
-        this.appraisers = appraisers;
-        this.questions = questions;
-        this.ratings = ratings;
     }
 
     public Long getId() {
