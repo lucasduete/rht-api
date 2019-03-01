@@ -54,12 +54,6 @@ public class Training implements Serializable {
         this.dateStart = dateStart;
     }
 
-    @JsonSetter("dateStart")
-    public void setDateStart(String date) {
-        this.setDateStart(convertDate(date));
-    }
-
-    @JsonGetter("dateStart")
     public LocalDate getDateStart() {
         return dateStart;
     }
@@ -68,14 +62,28 @@ public class Training implements Serializable {
         this.dateFinish = dateFinish;
     }
 
+    public LocalDate getDateFinish() {
+        return dateFinish;
+    }
+
+    @JsonSetter("dateStart")
+    public void setDateStart(String date) {
+        this.setDateStart(convertStringToLocalDate(date));
+    }
+
+    @JsonGetter("dateStart")
+    public String getDateStartJson() {
+        return convertLocalDateToString(this.dateStart);
+    }
+
     @JsonSetter("dateFinish")
     public void setDateFinish(String date) {
-        this.setDateFinish(convertDate(date));
+        this.setDateFinish(convertStringToLocalDate(date));
     }
 
     @JsonGetter("dateFinish")
-    public LocalDate getDateFinish() {
-        return dateFinish;
+    public String getDateFinishJson() {
+        return convertLocalDateToString(this.dateFinish);
     }
 
     public Integer quantVacancyUsed() {
@@ -126,8 +134,12 @@ public class Training implements Serializable {
                 '}';
     }
 
-    private LocalDate convertDate(String dateString) {
+    private LocalDate convertStringToLocalDate(String dateString) {
         return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    private String convertLocalDateToString(LocalDate localDate) {
+        return localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
 }
