@@ -1,10 +1,13 @@
 package io.github.lucasduete.rhtapi.models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,7 +33,7 @@ public class Training implements Serializable {
     private Integer quantHrsLesson;
 
     @Column(nullable = false)
-    private LocalDate dataStart;
+    private LocalDate dateStart;
 
     @Column(nullable = false)
     private LocalDate dateFinish;
@@ -47,12 +50,40 @@ public class Training implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
-    public Integer getVacancyUsed() {
+    public void setDateStart(LocalDate dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    @JsonSetter("dateStart")
+    public void setDateStart(String date) {
+        this.setDateStart(convertDate(date));
+    }
+
+    @JsonGetter("dateStart")
+    public LocalDate getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateFinish(LocalDate dateFinish) {
+        this.dateFinish = dateFinish;
+    }
+
+    @JsonSetter("dateFinish")
+    public void setDateFinish(String date) {
+        this.setDateFinish(convertDate(date));
+    }
+
+    @JsonGetter("dateFinish")
+    public LocalDate getDateFinish() {
+        return dateFinish;
+    }
+
+    public Integer quantVacancyUsed() {
         return this.employees.size();
     }
 
-    public Integer getVacancyOpen() {
-        return (this.vacancyOffered - this.getVacancyUsed());
+    public Integer quantVacancyOpen() {
+        return (this.vacancyOffered - this.quantVacancyUsed());
     }
 
     @Override
@@ -65,7 +96,7 @@ public class Training implements Serializable {
                 Objects.equals(vacancyOffered, training.vacancyOffered) &&
                 Objects.equals(quantLesson, training.quantLesson) &&
                 Objects.equals(quantHrsLesson, training.quantHrsLesson) &&
-                Objects.equals(dataStart, training.dataStart) &&
+                Objects.equals(dateStart, training.dateStart) &&
                 Objects.equals(dateFinish, training.dateFinish) &&
                 Objects.equals(employees, training.employees) &&
                 Objects.equals(appraisers, training.appraisers) &&
@@ -75,7 +106,7 @@ public class Training implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dataStart, dateFinish, employees, appraisers, questions, ratings);
+        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dateStart, dateFinish, employees, appraisers, questions, ratings);
     }
 
     @Override
@@ -86,13 +117,17 @@ public class Training implements Serializable {
                 ", vacancyOffered=" + vacancyOffered +
                 ", quantLesson=" + quantLesson +
                 ", quantHrsLesson=" + quantHrsLesson +
-                ", dataStart=" + dataStart +
+                ", dateStart=" + dateStart +
                 ", dateFinish=" + dateFinish +
                 ", employees=" + employees +
                 ", appraisers=" + appraisers +
                 ", questions=" + questions +
                 ", ratings=" + ratings +
                 '}';
+    }
+
+    private LocalDate convertDate(String dateString) {
+        return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
 }
