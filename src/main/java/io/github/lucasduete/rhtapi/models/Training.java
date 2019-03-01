@@ -1,6 +1,6 @@
 package io.github.lucasduete.rhtapi.models;
 
-import lombok.Builder;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +10,10 @@ import java.util.Objects;
 
 @Entity
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Training implements Serializable {
 
     @Id
@@ -43,108 +47,12 @@ public class Training implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Rating> ratings;
 
-    public Training() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getVacancyOffered() {
-        return vacancyOffered;
-    }
-
-    public void setVacancyOffered(Integer vacancyOffered) {
-        this.vacancyOffered = vacancyOffered;
-    }
-
     public Integer getVacancyUsed() {
         return this.employees.size();
     }
 
     public Integer getVacancyOpen() {
         return (this.vacancyOffered - this.getVacancyUsed());
-    }
-
-    public Integer getQuantLesson() {
-        return quantLesson;
-    }
-
-    public void setQuantLesson(Integer quantLesson) {
-        this.quantLesson = quantLesson;
-    }
-
-    public Integer getQuantHrsLesson() {
-        return quantHrsLesson;
-    }
-
-    public void setQuantHrsLesson(Integer quantHrsLesson) {
-        this.quantHrsLesson = quantHrsLesson;
-    }
-
-    public LocalDate getDataStart() {
-        return dataStart;
-    }
-
-    public void setDataStart(LocalDate dataStart) {
-        this.dataStart = dataStart;
-    }
-
-    public LocalDate getDateFinish() {
-        return dateFinish;
-    }
-
-    public void setDateFinish(LocalDate dateFinish) {
-        this.dateFinish = dateFinish;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
-
-    public List<Appraiser> getAppraisers() {
-        return appraisers;
-    }
-
-    public void addEmployee(Employee employee) {
-        this.employees.add(employee);
-    }
-
-    public void setAppraisers(List<Appraiser> appraisers) {
-        this.appraisers = appraisers;
-    }
-
-    public List<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
-
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
     }
 
     @Override
