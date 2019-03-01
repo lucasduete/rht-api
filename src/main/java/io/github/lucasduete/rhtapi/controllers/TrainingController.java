@@ -31,4 +31,9 @@ public class TrainingController {
         return ResponseEntity.ok(this.service.listAll());
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(this.service.findById(id));
+    }
+
 }

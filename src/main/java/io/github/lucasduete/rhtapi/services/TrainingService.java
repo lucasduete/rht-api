@@ -23,4 +23,8 @@ public class TrainingService {
         return this.repository.findAll();
     }
 
+    public Training findById(Long id) {
+        return this.repository.findById(id).orElse(null);
+    }
+
 }
