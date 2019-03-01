@@ -4,10 +4,7 @@ import io.github.lucasduete.rhtapi.models.Training;
 import io.github.lucasduete.rhtapi.services.TrainingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("training")
@@ -28,4 +25,10 @@ public class TrainingController {
         if (savedTraining != null) return ResponseEntity.status(HttpStatus.CREATED).body(savedTraining);
         else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
+    @GetMapping
+    public ResponseEntity listAll() {
+        return ResponseEntity.ok(this.service.listAll());
+    }
+
 }
