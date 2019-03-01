@@ -1,6 +1,10 @@
 package io.github.lucasduete.rhtapi.models;
 
 import io.github.lucasduete.rhtapi.models.enums.TypeQuestion;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,6 +12,10 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Question implements Serializable {
 
     @Id
@@ -26,57 +34,6 @@ public class Question implements Serializable {
 
     @OneToMany
     private List<Response> responses;
-
-    public Question() {
-        this.typeQuestion = TypeQuestion.SELECIONADA;
-    }
-
-    public Question(String question, TypeQuestion typeQuestion, List<String> options, List<Response> responses) {
-        this.question = question;
-        this.typeQuestion = typeQuestion;
-        this.options = options;
-        this.responses = responses;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
-    }
-
-    public TypeQuestion getTypeQuestion() {
-        return typeQuestion;
-    }
-
-    public void setTypeQuestion(TypeQuestion typeQuestion) {
-        this.typeQuestion = typeQuestion;
-    }
-
-    public List<String> getOptions() {
-        return options;
-    }
-
-    public void setOptions(List<String> options) {
-        this.options = options;
-    }
-
-    public List<Response> getResponses() {
-        return responses;
-    }
-
-    public void setResponses(List<Response> responses) {
-        this.responses = responses;
-    }
 
     @Override
     public boolean equals(Object o) {

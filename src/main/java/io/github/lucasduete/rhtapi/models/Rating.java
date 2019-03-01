@@ -1,10 +1,19 @@
 package io.github.lucasduete.rhtapi.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Rating implements Serializable {
 
     @Id
@@ -20,50 +29,12 @@ public class Rating implements Serializable {
     @ManyToOne
     private Employee employee;
 
-    public Rating() {
-
-    }
-
-    public Rating(Integer points, Training training, Employee employee) {
-        this.points = points;
-        this.training = training;
-        this.employee = employee;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getPoints() {
-        return points;
-    }
-
     public void setPoints(Integer points) {
         // Validate the limits of points
         if (points > 7) points = 7;
         if (points < 0) points = 0;
 
         this.points = points;
-    }
-
-    public Training getTraining() {
-        return training;
-    }
-
-    public void setTraining(Training training) {
-        this.training = training;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     @Override

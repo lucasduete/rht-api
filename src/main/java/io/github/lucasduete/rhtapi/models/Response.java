@@ -1,10 +1,19 @@
 package io.github.lucasduete.rhtapi.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Response implements Serializable {
 
     @Id
@@ -19,48 +28,6 @@ public class Response implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Question question;
-
-    public Response() {
-
-    }
-
-    public Response(String content, Employee employee, Question question) {
-        this.content = content;
-        this.employee = employee;
-        this.question = question;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public Question getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
 
     @Override
     public boolean equals(Object o) {

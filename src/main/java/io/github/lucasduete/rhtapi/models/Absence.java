@@ -1,11 +1,20 @@
 package io.github.lucasduete.rhtapi.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Absence implements Serializable {
 
     @Id
@@ -22,57 +31,6 @@ public class Absence implements Serializable {
 
     @ManyToOne
     private Employee employee;
-
-    public Absence() {
-
-    }
-
-    public Absence(LocalDate date, Integer quant, Training training, Employee employee) {
-        this.date = date;
-        this.quant = quant;
-        this.training = training;
-        this.employee = employee;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Integer getQuant() {
-        return quant;
-    }
-
-    public void setQuant(Integer quant) {
-        this.quant = quant;
-    }
-
-    public Training getTraining() {
-        return training;
-    }
-
-    public void setTraining(Training training) {
-        this.training = training;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 
     @Override
     public boolean equals(Object o) {
