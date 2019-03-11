@@ -17,6 +17,8 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Training implements Serializable {
 
     @Id
@@ -92,46 +94,6 @@ public class Training implements Serializable {
 
     public Integer quantVacancyOpen() {
         return (this.vacancyOffered - this.quantVacancyUsed());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Training training = (Training) o;
-        return Objects.equals(id, training.id) &&
-                Objects.equals(name, training.name) &&
-                Objects.equals(vacancyOffered, training.vacancyOffered) &&
-                Objects.equals(quantLesson, training.quantLesson) &&
-                Objects.equals(quantHrsLesson, training.quantHrsLesson) &&
-                Objects.equals(dateStart, training.dateStart) &&
-                Objects.equals(dateFinish, training.dateFinish) &&
-                Objects.equals(employees, training.employees) &&
-                Objects.equals(appraisers, training.appraisers) &&
-                Objects.equals(questions, training.questions) &&
-                Objects.equals(ratings, training.ratings);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, vacancyOffered, quantLesson, quantHrsLesson, dateStart, dateFinish, employees, appraisers, questions, ratings);
-    }
-
-    @Override
-    public String toString() {
-        return "Training{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", vacancyOffered=" + vacancyOffered +
-                ", quantLesson=" + quantLesson +
-                ", quantHrsLesson=" + quantHrsLesson +
-                ", dateStart=" + dateStart +
-                ", dateFinish=" + dateFinish +
-                ", employees=" + employees +
-                ", appraisers=" + appraisers +
-                ", questions=" + questions +
-                ", ratings=" + ratings +
-                '}';
     }
 
     private LocalDate convertStringToLocalDate(String dateString) {

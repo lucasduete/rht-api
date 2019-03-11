@@ -1,9 +1,6 @@
 package io.github.lucasduete.rhtapi.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +11,8 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Rating implements Serializable {
 
     @Id
@@ -35,32 +34,6 @@ public class Rating implements Serializable {
         if (points < 0) points = 0;
 
         this.points = points;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rating rating = (Rating) o;
-        return Objects.equals(id, rating.id) &&
-                Objects.equals(points, rating.points) &&
-                Objects.equals(training, rating.training) &&
-                Objects.equals(employee, rating.employee);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, points, training, employee);
-    }
-
-    @Override
-    public String toString() {
-        return "Rating{" +
-                "id=" + id +
-                ", points=" + points +
-                ", training=" + training +
-                ", employee=" + employee +
-                '}';
     }
 
 }
