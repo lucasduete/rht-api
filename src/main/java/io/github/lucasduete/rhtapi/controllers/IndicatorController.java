@@ -1,5 +1,6 @@
 package io.github.lucasduete.rhtapi.controllers;
 
+import io.github.lucasduete.rhtapi.controllers.valueobjects.IndicatorResponse;
 import io.github.lucasduete.rhtapi.services.IndicatorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +39,7 @@ public class IndicatorController {
         if (indicator ==  null) {
             return ResponseEntity.badRequest().build();
         } else {
-            return ResponseEntity.ok(indicator);
+            return ResponseEntity.ok(new IndicatorResponse(indicator));
         }
     }
 

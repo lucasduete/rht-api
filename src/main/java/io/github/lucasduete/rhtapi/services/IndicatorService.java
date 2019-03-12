@@ -1,6 +1,7 @@
 package io.github.lucasduete.rhtapi.services;
 
 import io.github.lucasduete.rhtapi.indicators.implementations.RatingIndicator;
+import io.github.lucasduete.rhtapi.indicators.implementations.VacancyIndicator;
 import io.github.lucasduete.rhtapi.models.Training;
 import io.github.lucasduete.rhtapi.repositories.TrainingRepository;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class IndicatorService {
 
         Training training = trainingOptional.get();
 
-        return new RatingIndicator(training).calculate();
+        return new VacancyIndicator(training).calculate();
     }
 
 }
