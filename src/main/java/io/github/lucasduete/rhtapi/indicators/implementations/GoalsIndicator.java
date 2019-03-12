@@ -17,13 +17,13 @@ public class GoalsIndicator implements Indicator {
     }
 
     @Override
-    public Integer calculate() {
+    public String calculate() {
 
         Integer maxHrsLesson = this.training.getQuantHrsLesson();
         Integer finishedHrsLesson = new Integer(maxHrsLesson);
 
         for (Absence absence : absences) finishedHrsLesson -= (absence.getQuant() * 60);
 
-        return (maxHrsLesson / finishedHrsLesson) * 100;
+        return String.valueOf((maxHrsLesson / finishedHrsLesson) * 100);
     }
 }

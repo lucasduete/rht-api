@@ -12,8 +12,8 @@ public class VacancyIndicator implements Indicator {
     }
 
     @Override
-    public Integer calculate() {
-        return (this.training.quantVacancyUsed() / this.training.getVacancyOffered()) * 100;
+    public String calculate() {
+        return String.valueOf((this.training.quantVacancyUsed() / this.training.getVacancyOffered()) * 100);
     }
 
 }

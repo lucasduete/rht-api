@@ -15,10 +15,10 @@ public class AbsenceIndicator implements Indicator {
     }
 
     @Override
-    public Integer calculate() {
+    public String calculate() {
 
         Integer quantAbsence = this.service.listByTraining(this.training.getId()).size();
 
-        return (this.training.getQuantLesson() - quantAbsence);
+        return String.valueOf(this.training.getQuantLesson() - quantAbsence);
     }
 }
