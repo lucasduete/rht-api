@@ -1,10 +1,12 @@
 package io.github.lucasduete.rhtapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -22,11 +24,20 @@ public class Rating implements Serializable {
     @Column(nullable = false)
     private Integer points;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id", nullable = false)
+    @JsonBackReference
     private Training training;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_email", nullable = false)
     private Employee employee;
+
+    public Rating(Integer points, Training training, Employee employee) {
+        this.points = points;
+        this.training = training;
+        this.employee = employee;
+    }
 
     public void setPoints(Integer points) {
         // Validate the limits of points

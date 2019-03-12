@@ -1,6 +1,7 @@
 package io.github.lucasduete.rhtapi.models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -49,8 +51,13 @@ public class Training implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Question> questions;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "training")
+    @JsonManagedReference
     private List<Rating> ratings;
+
+    {
+        this.ratings = new ArrayList<>();
+    }
 
     public void setDateStart(LocalDate dateStart) {
         this.dateStart = dateStart;
@@ -94,6 +101,10 @@ public class Training implements Serializable {
 
     public Integer quantVacancyOpen() {
         return (this.vacancyOffered - this.quantVacancyUsed());
+    }
+
+    public void addRating(Rating rating) {
+        this.ratings.add(rating);
     }
 
     private LocalDate convertStringToLocalDate(String dateString) {
