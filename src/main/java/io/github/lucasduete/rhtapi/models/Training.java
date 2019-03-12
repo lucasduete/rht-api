@@ -97,7 +97,7 @@ public class Training implements Serializable {
     }
 
     private LocalDate convertStringToLocalDate(String dateString) {
-        return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        return LocalDate.parse(dateString.split("T")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     private String convertLocalDateToString(LocalDate localDate) {
