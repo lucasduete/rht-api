@@ -16,7 +16,7 @@ public class RatingIndicator implements Indicator {
 
         Long ratingHigh = training.getRatings().stream().filter(rating -> rating.getPoints() >= 5).count();
 
-        return String.valueOf((training.getRatings().size() - ratingHigh.intValue()) * 100);
+        return String.valueOf((training.getRatings().size() - ratingHigh.intValue()) * 100) + "pts";
     }
 
 }
