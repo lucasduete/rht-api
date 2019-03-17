@@ -5,7 +5,7 @@ import java.io.Serializable;
 public enum TypeQuestion implements Serializable {
 
     ABERTA("Aberta"),
-    SELECIONADA("Selecionada"),
+    FECHADA("Fechada"),
     PONTUACAO("Pontuacao");
 
     private String name;
