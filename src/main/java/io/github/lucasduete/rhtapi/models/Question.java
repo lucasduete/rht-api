@@ -6,7 +6,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -31,7 +30,7 @@ public class Question implements Serializable {
     @CollectionTable
     private List<String> options;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Response> responses;
 
 }
