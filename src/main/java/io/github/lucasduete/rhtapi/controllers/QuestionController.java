@@ -16,11 +16,13 @@ public class QuestionController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity saveQuestion(@RequestBody Question question) {
+    @PostMapping("{idTraining}")
+    public ResponseEntity saveQuestion(@RequestBody Question question,
+                                       @PathVariable("idTraining") Long idTraining) {
         if (question == null) return ResponseEntity.badRequest().body("Question can't be null");
+        if (idTraining == null) return ResponseEntity.badRequest().body("Id of Training can't be null");
 
-        Question savedQuestion = this.service.save(question);
+        Question savedQuestion = this.service.save(question, idTraining);
 
         if (savedQuestion != null) return ResponseEntity.status(HttpStatus.CREATED).body(savedQuestion);
         else return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Occurred error while saving question");
