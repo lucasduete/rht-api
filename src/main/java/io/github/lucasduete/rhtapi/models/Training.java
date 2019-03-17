@@ -49,7 +49,7 @@ public class Training implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     private List<Appraiser> appraisers;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "training")
