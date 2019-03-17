@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,6 +57,9 @@ public class Training implements Serializable {
     private List<Rating> ratings;
 
     {
+        this.employees = new ArrayList<>();
+        this.appraisers = new ArrayList<>();
+        this.questions = new ArrayList<>();
         this.ratings = new ArrayList<>();
     }
 
@@ -103,9 +107,25 @@ public class Training implements Serializable {
         return (this.vacancyOffered - this.quantVacancyUsed());
     }
 
-    public void addRating(Rating rating) {
+    // METHODS TO ADD ELEMENTS TO ATTRIBUTES THAT ARE LIST
+
+    public void addEmployee(@NotNull final Employee employee) {
+        this.employees.add(employee);
+    }
+
+    public void addAppraiser(@NotNull final Appraiser appraiser) {
+        this.appraisers.add(appraiser);
+    }
+
+    public void addQuestion(@NotNull final Question question) {
+        this.questions.add(question);
+    }
+
+    public void addRating(@NotNull final Rating rating) {
         this.ratings.add(rating);
     }
+
+    // METHODS AUXILIARIES
 
     private LocalDate convertStringToLocalDate(String dateString) {
         return LocalDate.parse(dateString.split("T")[0], DateTimeFormatter.ofPattern("yyyy-MM-dd"));
