@@ -44,6 +44,7 @@ public class Training implements Serializable {
     private LocalDate dateFinish;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Employee> employees;
 
     @ManyToMany(fetch = FetchType.LAZY)

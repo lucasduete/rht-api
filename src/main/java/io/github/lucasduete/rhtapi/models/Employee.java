@@ -1,5 +1,6 @@
 package io.github.lucasduete.rhtapi.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Employee implements Serializable {
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Training> trainings;
 
 }

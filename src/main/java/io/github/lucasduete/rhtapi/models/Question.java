@@ -1,5 +1,6 @@
 package io.github.lucasduete.rhtapi.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.github.lucasduete.rhtapi.models.enums.TypeQuestion;
 import lombok.*;
 
@@ -31,7 +32,8 @@ public class Question implements Serializable {
     @CollectionTable
     private List<String> options;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true, cascade = CascadeType.ALL, mappedBy = "question")
+    @JsonManagedReference
     private List<Response> responses;
 
     {
