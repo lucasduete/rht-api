@@ -23,8 +23,13 @@ public class ResponseService {
     }
 
     @Transactional(Transactional.TxType.REQUIRED)
-    public Response save(Response response) {
-        return this.responseRepository.save(response);
+    public Response save(Response response, Question question) {
+
+        question.addResponse(response);
+
+        this.questionService.save(question);
+
+        return response;
     }
 
     @Transactional(Transactional.TxType.REQUIRES_NEW)
@@ -35,7 +40,7 @@ public class ResponseService {
         Question question = this.questionService.getQuestion(responseModel.getIdQuestion());
 
         return this.save(
-                new Response(null, responseModel.getContent(), employee, question)
+                new Response(null, responseModel.getContent(), employee, question), question
         );
     }
 

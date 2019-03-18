@@ -33,6 +33,11 @@ public class QuestionService {
         return question;
     }
 
+    public Question save(Question question) {
+
+        return this.questioRepository.save(question);
+    }
+
     public Question getQuestion(Long id) {
         return this.questioRepository.getOne(id);
     }
