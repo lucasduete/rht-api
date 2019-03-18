@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,5 +33,18 @@ public class Question implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Response> responses;
+
+    {
+        this.options = new ArrayList<>();
+        this.responses = new ArrayList<>();
+    }
+
+    public void addOption(String option) {
+        this.options.add(option);
+    }
+
+    public void addResponse(Response response) {
+        this.responses.add(response);
+    }
 
 }
