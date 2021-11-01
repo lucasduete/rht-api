@@ -7,12 +7,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Builder
@@ -28,6 +28,7 @@ public class Training implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @Size(min = 10, max = 100)
     @Column(length = 100, nullable = false)
     private String name;
 
@@ -64,20 +65,12 @@ public class Training implements Serializable {
         this.ratings = new ArrayList<>();
     }
 
-    public void setDateStart(LocalDate dateStart) {
-        this.dateStart = dateStart;
-    }
-
     public LocalDate getDateStart() {
         return dateStart;
     }
 
-    public void setDateFinish(LocalDate dateFinish) {
-        this.dateFinish = dateFinish;
-    }
-
-    public LocalDate getDateFinish() {
-        return dateFinish;
+    public void setDateStart(LocalDate dateStart) {
+        this.dateStart = dateStart;
     }
 
     @JsonSetter("dateStart")
@@ -85,14 +78,22 @@ public class Training implements Serializable {
         this.setDateStart(convertStringToLocalDate(date));
     }
 
-    @JsonGetter("dateStart")
-    public String getDateStartJson() {
-        return convertLocalDateToString(this.dateStart);
+    public LocalDate getDateFinish() {
+        return dateFinish;
+    }
+
+    public void setDateFinish(LocalDate dateFinish) {
+        this.dateFinish = dateFinish;
     }
 
     @JsonSetter("dateFinish")
     public void setDateFinish(String date) {
         this.setDateFinish(convertStringToLocalDate(date));
+    }
+
+    @JsonGetter("dateStart")
+    public String getDateStartJson() {
+        return convertLocalDateToString(this.dateStart);
     }
 
     @JsonGetter("dateFinish")

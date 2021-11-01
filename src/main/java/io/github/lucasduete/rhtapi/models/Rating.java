@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -21,14 +22,17 @@ public class Rating implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     @Column(nullable = false)
     private Integer points;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "training_id", nullable = false)
     @JsonBackReference
     private Training training;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_email", nullable = false)
     private Employee employee;
