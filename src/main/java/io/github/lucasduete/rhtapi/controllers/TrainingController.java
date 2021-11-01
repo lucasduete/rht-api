@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("training")
 public class TrainingController {
@@ -17,7 +19,7 @@ public class TrainingController {
     }
 
     @PostMapping
-    public ResponseEntity saveTraining(@RequestBody Training training) {
+    public ResponseEntity saveTraining(@RequestBody @Valid Training training) {
         if (training == null) return ResponseEntity.badRequest().body("Training can't be null");
 
         Training savedTraining = this.service.save(training);

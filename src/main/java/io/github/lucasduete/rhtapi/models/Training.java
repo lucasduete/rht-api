@@ -3,6 +3,7 @@ package io.github.lucasduete.rhtapi.models;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import io.github.lucasduete.rhtapi.controllers.validators.training.TrainingDatesValidator;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
+@TrainingDatesValidator
 public class Training implements Serializable {
 
     @Id
