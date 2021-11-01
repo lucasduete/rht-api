@@ -5,6 +5,7 @@ import io.github.lucasduete.rhtapi.models.enums.TypeQuestion;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Question implements Serializable {
     @GeneratedValue
     private Long id;
 
+    @Size(min = 10)
     @Column(nullable = false)
     private String question;
 

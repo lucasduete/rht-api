@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
@@ -17,7 +19,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity saveEmployee(@RequestBody Employee employee) {
+    public ResponseEntity saveEmployee(@RequestBody @Valid Employee employee) {
 
         if (employee == null) return ResponseEntity.badRequest().body("Employee not be null");
 
